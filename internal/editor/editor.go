@@ -88,6 +88,11 @@ func (e *Editor) Redo() bool {
 	return true
 }
 
+// Info returns information about the current state and available operations.
+func (e *Editor) Info() (currentPos int, totalHistory int, canUndo bool, canRedo bool) {
+	return e.currPos, len(e.history), e.CanUndo(), e.CanRedo()
+}
+
 // addHistory adds a new state to the history, managing the circular buffer if needed.
 func (e *Editor) addHistory(text string, cmd command.Command) {
 	// If we're not at the end of history, we need to truncate future states.
