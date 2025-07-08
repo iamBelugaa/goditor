@@ -56,4 +56,7 @@ func main() {
 
 	editor.Insert(11, ", Programming")
 	fmt.Printf("After inserting ', Programming': \"%s\"\n", editor.Text())
+
+	editor.Insert(editor.Length()-1, " Meow Meow")
+	fmt.Printf("After inserting ' Meow Meow': \"%s\"\n", editor.Text())
 }

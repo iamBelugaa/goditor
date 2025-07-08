@@ -36,6 +36,14 @@ func (e *Editor) Text() string {
 	return e.history[e.currPos].Text
 }
 
+// Length returns the length of the current text content.
+func (e *Editor) Length() uint {
+	if e.currPos < 0 {
+		return 0
+	}
+	return uint(len(e.history[e.currPos].Text))
+}
+
 // Insert adds text at the specified position.
 func (e *Editor) Insert(pos uint, text string) {
 	if text == "" {
