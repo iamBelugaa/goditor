@@ -48,6 +48,18 @@ func (e *Editor) Insert(pos uint, text string) {
 	e.addHistory(newText, cmd)
 }
 
+// Delete removes text from the specified range [startPos, endPos).
+func (e *Editor) Delete(start, end uint) {
+	if start >= end || start >= uint(len(e.Text())) {
+		return
+	}
+
+	cmd := &command.DeleteCommand{Start: start, End: end}
+	newText := cmd.Execute(e.Text())
+
+	e.addHistory(newText, cmd)
+}
+
 // CanUndo checks if undo operation is possible.
 func (e *Editor) CanUndo() bool {
 	return e.currPos >= 0
