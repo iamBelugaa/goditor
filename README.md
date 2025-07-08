@@ -1,9 +1,7 @@
 # Text Editor with Undo/Redo Using the Command Pattern
 
 This project demonstrates how to build a text editor that can undo and redo
-operations using the Command pattern. The Command pattern is one of the most
-useful design patterns for any application that needs to track and reverse user
-actions.
+operations using the Command pattern.
 
 ## Understanding the Command Pattern
 
