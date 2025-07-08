@@ -30,7 +30,7 @@ func NewTextEditor(maxHistory uint) *Editor {
 
 // Text returns the current text content.
 func (e *Editor) Text() string {
-	if e.currPos == -1 {
+	if e.currPos < 0 {
 		return ""
 	}
 	return e.history[e.currPos].Text
@@ -48,7 +48,7 @@ func (e *Editor) Insert(pos uint, text string) {
 	e.addHistory(newText, cmd)
 }
 
-// Delete removes text from the specified range [startPos, endPos).
+// Delete removes text from the specified range.
 func (e *Editor) Delete(start, end uint) {
 	if start >= end || start >= uint(len(e.Text())) {
 		return
