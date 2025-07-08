@@ -35,3 +35,31 @@ func (e *Editor) Text() string {
 	}
 	return e.history[e.currPos].Text
 }
+
+// CanUndo checks if undo operation is possible.
+func (e *Editor) CanUndo() bool {
+	return e.currPos >= 0
+}
+
+// Undo reverts to the previous state, returns true if successful.
+func (e *Editor) Undo() bool {
+	if !e.CanUndo() {
+		return false
+	}
+	e.currPos--
+	return true
+}
+
+// CanRedo checks if redo operation is possible.
+func (e *Editor) CanRedo() bool {
+	return e.currPos < len(e.history)-1
+}
+
+// Redo moves forward to the next state, returns true if successful.
+func (e *Editor) Redo() bool {
+	if !e.CanRedo() {
+		return false
+	}
+	e.currPos++
+	return true
+}
