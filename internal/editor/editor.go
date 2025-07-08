@@ -36,6 +36,18 @@ func (e *Editor) Text() string {
 	return e.history[e.currPos].Text
 }
 
+// Insert adds text at the specified position.
+func (e *Editor) Insert(pos uint, text string) {
+	if text == "" {
+		return
+	}
+
+	cmd := &command.InsertCommand{Position: pos, Text: text}
+	newText := cmd.Execute(e.Text())
+
+	e.addHistory(newText, cmd)
+}
+
 // CanUndo checks if undo operation is possible.
 func (e *Editor) CanUndo() bool {
 	return e.currPos >= 0
@@ -62,4 +74,24 @@ func (e *Editor) Redo() bool {
 	}
 	e.currPos++
 	return true
+}
+
+// addHistory adds a new state to the history, managing the circular buffer if needed.
+func (e *Editor) addHistory(text string, cmd command.Command) {
+	// If we're not at the end of history, we need to truncate future states.
+	// This happens when user undoes some operations and then performs a new one.
+	if e.currPos < len(e.history)-1 {
+		e.history = e.history[:e.currPos+1]
+	}
+
+	// Add the new state.
+	e.history = append(e.history, &State{Text: text, Command: cmd})
+	e.currPos = len(e.history) - 1
+
+	// If we exceed maximum history, remove the oldest state.
+	if e.currPos > int(e.maxHistory) {
+		// Shift all elements left by one position.
+		e.history = e.history[1:]
+		e.currPos--
+	}
 }
