@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/iamBelugaa/editor/internal/editor"
+	"github.com/iamBelugaa/goditor/internal/editor"
 )
 
 func main() {

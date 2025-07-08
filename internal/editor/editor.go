@@ -1,6 +1,6 @@
 package editor
 
-import "github.com/iamBelugaa/editor/internal/command"
+import "github.com/iamBelugaa/goditor/internal/command"
 
 // State represents the complete state of the text editor at a point in time.
 type State struct {
