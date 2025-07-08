@@ -61,10 +61,9 @@ Redo works the opposite way. If you've undone some operations, there are states
 in the history that come after your current position. Calling `Redo()` moves the
 current position forward to the next state in the history.
 
-## Detailed Example: Building a Shopping List
+## Example: Building a Shopping List
 
-Let's walk through a more detailed example to see exactly how the command
-pattern works. Imagine we're using our text editor to build a shopping list.
+Imagine we're using our text editor to build a shopping list.
 
 We start by creating an editor with a history limit of 10 operations:
 
